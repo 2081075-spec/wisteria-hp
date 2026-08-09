@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.wisteria-grp.jp/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/business/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/business/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/business/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/business/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/business/metal/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/business/metal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/business/metal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/business/metal/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/business/metal/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/business/kharis/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/business/kharis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/business/kharis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/business/kharis/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/business/kharis/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/business/wagyu/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/business/wagyu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/business/wagyu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/business/wagyu/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/business/wagyu/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/company/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/company/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/company/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/company/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/company/</loc>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.wisteria-grp.jp/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wisteria-grp.jp/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wisteria-grp.jp/contact/"/>
+  </url>
+  <url>
+    <loc>https://www.wisteria-grp.jp/en/contact/</loc>
+  </url>
+</urlset>
