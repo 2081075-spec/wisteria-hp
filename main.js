@@ -232,15 +232,37 @@
   var done = document.querySelector('.done');
   if (form) {
     var endpoint = form.getAttribute('data-endpoint');
+    var EN = form.getAttribute('data-lang') === 'en';
+    var T = EN ? {
+      name: 'Please enter your name.',
+      email: 'Please enter your email address.',
+      emailFmt: 'Please check the email address format, e.g. info@example.com',
+      body: 'Please enter your message. Tell us which business line it concerns and what you would like to know.',
+      missing: 'Some required fields are empty. Please check the fields marked in red below.',
+      sending: 'Sending…', send: 'Send an inquiry',
+      subject: '[Wisteria HP] Inquiry: ',
+      failed: 'The message could not be sent. Please <a href="mailto:info@wisteria.email?subject=%s&body=%b">email info@wisteria.email directly</a> or try again later.',
+      labels: ['Subject', 'Company / organization', 'Name', 'Email', 'Phone', 'Message']
+    } : {
+      name: 'お名前を入力してください。',
+      email: 'メールアドレスを入力してください。',
+      emailFmt: 'メールアドレスの形式をご確認ください。例：info@example.com',
+      body: 'ご相談の内容を入力してください。どの事業について、何をお知りになりたいかをお書きください。',
+      missing: '入力されていない項目があります。下の赤い表示のある欄をご確認ください。',
+      sending: '送信しています…', send: '相談内容を送る',
+      subject: '【Wisteria HP】お問い合わせ：',
+      failed: '送信できませんでした。お手数ですが、<a href="mailto:info@wisteria.email?subject=%s&body=%b">info@wisteria.email へ直接メールを送る</a>か、しばらく経ってからもう一度お試しください。',
+      labels: ['種別', '会社名・団体名', 'お名前', 'メールアドレス', '電話番号', 'ご相談の内容']
+    };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var val = function (n) { return form.elements[n] && form.elements[n].value ? form.elements[n].value.trim() : ''; };
       var errors = {};
-      if (!val('name')) errors.name = 'お名前を入力してください。';
+      if (!val('name')) errors.name = T.name;
       var email = val('email');
-      if (!email) errors.email = 'メールアドレスを入力してください。';
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'メールアドレスの形式をご確認ください。例：info@example.com';
-      if (!val('body')) errors.body = 'ご相談の内容を入力してください。どの事業について、何をお知りになりたいかをお書きください。';
+      if (!email) errors.email = T.email;
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = T.emailFmt;
+      if (!val('body')) errors.body = T.body;
 
       ['name', 'email', 'body'].forEach(function (k) {
         var p = document.getElementById(k + '-error');
@@ -249,7 +271,7 @@
       var alert = form.querySelector('.alert');
       var alertMsg = alert ? alert.querySelector('p') : null;
       if (Object.keys(errors).length) {
-        if (alert) { alert.style.display = 'block'; if (alertMsg) alertMsg.innerHTML = '入力されていない項目があります。下の赤い表示のある欄をご確認ください。'; }
+        if (alert) { alert.style.display = 'block'; if (alertMsg) alertMsg.innerHTML = T.missing; }
         var first = document.getElementById(Object.keys(errors)[0]);
         if (first) first.focus();
         return;
@@ -260,17 +282,16 @@
       var btn = form.querySelector('button.submit');
       var kindSel = form.elements.kind;
       var kindLabel = kindSel && kindSel.options[kindSel.selectedIndex] ? kindSel.options[kindSel.selectedIndex].text : '';
-      var payload = {
-        '種別': kindLabel,
-        '会社名・団体名': val('company'),
-        'お名前': val('name'),
-        'メールアドレス': email,
-        '電話番号': val('tel'),
-        'ご相談の内容': val('body'),
-        '_subject': '【Wisteria HP】お問い合わせ：' + kindLabel,
-        '_replyto': email,
-        '_template': 'table'
-      };
+      var payload = {};
+      payload[T.labels[0]] = kindLabel;
+      payload[T.labels[1]] = val('company');
+      payload[T.labels[2]] = val('name');
+      payload[T.labels[3]] = email;
+      payload[T.labels[4]] = val('tel');
+      payload[T.labels[5]] = val('body');
+      payload._subject = T.subject + kindLabel;
+      payload._replyto = email;
+      payload._template = 'table';
       function ok() {
         form.style.display = 'none';
         if (done) { done.style.display = 'block'; done.focus && done.focus(); }
@@ -282,11 +303,11 @@
         var bodyText = encodeURIComponent('会社名・団体名：' + payload['会社名・団体名'] + '\nお名前：' + payload['お名前'] + '\nメール：' + email + '\n電話：' + payload['電話番号'] + '\n\n' + payload['ご相談の内容']);
         if (alert) {
           alert.style.display = 'block';
-          if (alertMsg) alertMsg.innerHTML = '送信できませんでした。お手数ですが、<a href="mailto:info@wisteria.email?subject=' + subject + '&body=' + bodyText + '">info@wisteria.email へ直接メールを送る</a>か、しばらく経ってからもう一度お試しください。';
+          if (alertMsg) alertMsg.innerHTML = T.failed.replace('%s', subject).replace('%b', bodyText);
         }
       }
       if (!endpoint || !window.fetch) { fail(); return; }
-      if (btn) { btn.disabled = true; btn.textContent = '送信しています…'; }
+      if (btn) { btn.disabled = true; btn.textContent = T.sending; }
       fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
         .then(function (r) { return r.json().then(function (j) { return { status: r.status, json: j }; }); })
         .then(function (res) { if (res.status >= 200 && res.status < 300 && String(res.json.success) !== 'false') ok(); else fail(); })
@@ -298,7 +319,7 @@
     done.style.display = 'none';
     form.reset();
     var btn = form.querySelector('button.submit');
-    if (btn) { btn.disabled = false; btn.textContent = '相談内容を送る'; }
+    if (btn) { btn.disabled = false; btn.textContent = form.getAttribute('data-lang') === 'en' ? 'Send an inquiry' : '相談内容を送る'; }
     form.style.display = 'flex';
   });
 })();

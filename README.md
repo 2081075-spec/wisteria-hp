@@ -1,4 +1,4 @@
-# 株式会社Wisteria コーポレートサイト（日本語版）
+# 株式会社Wisteria コーポレートサイト（日本語版・英語版）
 
 素のHTML / CSS / JavaScript のみ。ビルド不要です。
 公開: https://2081075-spec.github.io/wisteria-hp/（GitHub Pages）
@@ -12,7 +12,8 @@
     business/wagyu/index.html Wisteria WAGYU
     company/index.html        会社概要
     contact/index.html        お問い合わせ
-    404.html                  見つからないページ
+    en/…                      英語版（同じ構成。en/index.html, en/business/…, en/company/, en/contact/）
+    404.html                  見つからないページ（日英併記）
     styles.css                全ページ共通のスタイル
     main.js                   全ページ共通のスクリプト（メニュー、スクロール演出、枝分かれSVG、フォーム送信）
     assets/                   ロゴ・写真・favicon・OG画像
@@ -31,11 +32,12 @@
 
 - CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。
 - canonical / OGP / sitemap は `https://www.wisteria-grp.jp/` を前提にしています。GitHub Pages に独自ドメインを設定するまでは、検索エンジンには github.io 側の URL ではなく wisteria-grp.jp が正規URLとして伝わります。
-- 英語版（`/en/`）は未作成です。ヘッダーの EN 表示は現在リンクではありません。作成時は `hreflang` と sitemap に en を追加してください。
+- 英語版は `/en/` 配下。各ページの `<head>` に ja / en / x-default の `hreflang`、sitemap にも両言語を登録済み。ヘッダーの JA / EN で対応ページ同士を行き来できます。
+- 英語版の文言方針: 直訳ではなく英語圏向けに簡潔に書く。用語は Metal Recovery / Urban Mining、HPP (High Pressure Processing)、cold-pressed、Secondhand Dealer Licence (Tokyo Metropolitan Public Safety Commission)。detox / anti-aging / supplement 等の効能表現は使わない。
 
 ## お問い合わせフォーム
 
-`contact/` のフォームは FormSubmit（https://formsubmit.co/）経由で info@wisteria.email に届きます。
+`contact/` と `en/contact/` のフォームは FormSubmit（https://formsubmit.co/）経由で info@wisteria.email に届きます。
 **初回送信時に info@wisteria.email へ「有効化（Activate）」メールが届くので、リンクを一度クリックしてください。** それまでの送信は届きません。
 送信に失敗した場合、画面には info@wisteria.email へ直接メールを送るリンクが表示されます。
 

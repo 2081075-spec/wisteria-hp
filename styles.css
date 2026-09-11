@@ -358,3 +358,11 @@ footer .cr a:hover{border-bottom-color:currentColor}
 .cats>a:hover .more{color:var(--violet);transform:translateX(6px)}
 @media (max-width:1023px){.cats{grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}.cats>a{border-bottom:1px solid var(--line)}}
 @media (max-width:560px){.cats{grid-template-columns:1fr}}
+
+/* English typography: Latin text needs tighter tracking than CJK */
+html[lang="en"] .hero h1{letter-spacing:.03em;font-size:clamp(30px,4.4vw,62px);line-height:1.3}
+html[lang="en"] .hero p.sub,html[lang="en"] .statement-lg,html[lang="en"] .lead,html[lang="en"] .body,html[lang="en"] .biz p.txt{letter-spacing:.01em}
+html[lang="en"] h1.page,html[lang="en"] h2.sec,html[lang="en"] h2.side,html[lang="en"] .statement,html[lang="en"] .contact-h,html[lang="en"] .cta h2,html[lang="en"] .tagline,html[lang="en"] .biz h2,html[lang="en"] .cols h3,html[lang="en"] ol.steps .ttl,html[lang="en"] .faq .q{letter-spacing:.03em}
+html[lang="en"] .vine .ja,html[lang="en"] .idx .ja{letter-spacing:.03em}
+html[lang="en"] .split .w{max-width:100%}
+@media (max-width:767px){html[lang="en"] .hero h1{font-size:clamp(28px,8vw,36px)}}
