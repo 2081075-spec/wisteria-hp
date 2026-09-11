@@ -1,35 +1,45 @@
 # 株式会社Wisteria コーポレートサイト（日本語版）
 
 素のHTML / CSS / JavaScript のみ。ビルド不要です。
+公開: https://2081075-spec.github.io/wisteria-hp/（GitHub Pages）
 
 ## ファイル
 
-    index.html      トップ
-    business.html   事業内容
-    metal.html      金属回収
-    kharis.html     KHARIS
-    wagyu.html      Wisteria WAGYU
-    company.html    会社概要
-    contact.html    お問い合わせ
-    styles.css      全ページ共通のスタイル
-    main.js         全ページ共通のスクリプト
-    assets/         ロゴ・写真
+    index.html                トップ
+    business/index.html       事業内容（4領域・6事業）
+    business/metal/index.html 金属回収
+    business/kharis/index.html KHARIS
+    business/wagyu/index.html Wisteria WAGYU
+    company/index.html        会社概要
+    contact/index.html        お問い合わせ
+    404.html                  見つからないページ
+    styles.css                全ページ共通のスタイル
+    main.js                   全ページ共通のスクリプト（メニュー、スクロール演出、枝分かれSVG、フォーム送信）
+    assets/                   ロゴ・写真・favicon・OG画像
     sitemap.xml / robots.txt
+
+    business.html / company.html / contact.html / metal.html / kharis.html / wagyu.html
+      → 旧URL用の転送ページ（meta refresh + canonical）。新しいURLは末尾スラッシュのディレクトリ形式です。
 
 ## ローカルで確認する
 
-VS Code の Live Server 拡張でこのフォルダを開くか、ターミナルで:
+    python -m http.server 8000
 
-    npx serve .
-    # または
-    python3 -m http.server 8000
+`file://` で直接開くと相対リンク（`business/` 形式）が解決できないため、必ずサーバー経由で確認してください。
 
-file:// で直接開いても表示されますが、サーバー経由での確認を推奨します。
+## 更新時のメモ
 
-## 公開時に対応が必要な箇所
+- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。
+- canonical / OGP / sitemap は `https://www.wisteria-grp.jp/` を前提にしています。GitHub Pages に独自ドメインを設定するまでは、検索エンジンには github.io 側の URL ではなく wisteria-grp.jp が正規URLとして伝わります。
+- 英語版（`/en/`）は未作成です。ヘッダーの EN 表示は現在リンクではありません。作成時は `hreflang` と sitemap に en を追加してください。
 
-- `contact.html` のフォームは現在フロント側の入力チェックのみです。`<form action>` を実際の送信先に差し替えてください。
-- `metal.html` に「対象となるもの」「よくあるご質問」の TODO コメントが2か所あります。原稿が決まり次第、差し替えてください。
-- 各ページの canonical / hreflang / OGP と `sitemap.xml` は https://www.wisteria-grp.jp を前提にしています。実際のドメインとURL構成にあわせて書き換えてください。
-- 英語版（/en/）は未作成です。ヘッダーの EN リンクは現在ダミー（#）です。
-- 古物商許可番号は埼玉県時代のものを暫定で掲載しています（会社概要）。
+## お問い合わせフォーム
+
+`contact/` のフォームは FormSubmit（https://formsubmit.co/）経由で info@wisteria.email に届きます。
+**初回送信時に info@wisteria.email へ「有効化（Activate）」メールが届くので、リンクを一度クリックしてください。** それまでの送信は届きません。
+送信に失敗した場合、画面には info@wisteria.email へ直接メールを送るリンクが表示されます。
+
+## 未確定・要確認
+
+- 会社概要の古物商許可番号（`company/index.html` に TODO コメントあり）。
+- 金属回収ページ「対象となるもの」の具体的な品目・受入条件（`business/metal/index.html` に TODO コメントあり）。
