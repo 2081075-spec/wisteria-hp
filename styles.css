@@ -366,3 +366,12 @@ html[lang="en"] h1.page,html[lang="en"] h2.sec,html[lang="en"] h2.side,html[lang
 html[lang="en"] .vine .ja,html[lang="en"] .idx .ja{letter-spacing:.03em}
 html[lang="en"] .split .w{max-width:100%}
 @media (max-width:767px){html[lang="en"] .hero h1{font-size:clamp(28px,8vw,36px)}}
+
+/* mobile header: language link beside the hamburger; language row inside the drawer */
+.hd-m{display:flex;align-items:center;gap:6px}
+.lang-m{display:none;font-family:var(--en);font-size:15px;letter-spacing:.14em;padding:10px 12px;min-height:44px;align-items:center;border-bottom:1px solid transparent;transition:border-color .25s ease}
+.lang-m:hover{color:inherit;border-bottom-color:currentColor}
+.drawer .lang-d{font-family:var(--en);font-size:18px;letter-spacing:.14em;border-bottom:0;color:var(--muted);margin-top:4px;min-height:44px}
+.drawer .lang-d::before{content:"";display:inline-block;width:20px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px;opacity:.6}
+.drawer.open a:nth-child(6){transition-delay:.38s}
+@media (max-width:767px){.lang-m{display:inline-flex}}
