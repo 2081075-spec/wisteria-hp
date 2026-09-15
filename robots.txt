@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.wisteria-grp.jp/sitemap.xml
+Sitemap: https://www.wisteria-group.jp/sitemap.xml

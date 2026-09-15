@@ -1,13 +1,14 @@
 # 株式会社Wisteria コーポレートサイト（日本語版・英語版）
 
 素のHTML / CSS / JavaScript のみ。ビルド不要です。
-公開: https://2081075-spec.github.io/wisteria-hp/（GitHub Pages）
+公開: https://www.wisteria-group.jp/（GitHub Pages・独自ドメイン。リポジトリ直下の `CNAME` で設定）
 
 ## ファイル
 
     index.html                トップ
-    business/index.html       事業内容（4領域・6事業）
+    business/index.html       事業内容（5領域・7事業）
     business/metal/index.html 金属回収
+    business/ingredients/index.html 食品原料・食品添加物（日本語のみ。英語版は未作成）
     business/kharis/index.html KHARIS
     business/wagyu/index.html Wisteria WAGYU
     company/index.html        会社概要
@@ -31,7 +32,8 @@
 ## 更新時のメモ
 
 - CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。
-- canonical / OGP / sitemap は `https://www.wisteria-grp.jp/` を前提にしています。GitHub Pages に独自ドメインを設定するまでは、検索エンジンには github.io 側の URL ではなく wisteria-grp.jp が正規URLとして伝わります。
+- canonical / OGP / sitemap / JSON-LD は `https://www.wisteria-group.jp/` を正規URLにしています。
+- DNS はお名前.com レンタルサーバー（ベーシック）のコントロールパネル →「ドメイン」→「DNSレコード」で管理しています（www は CNAME → `2081075-spec.github.io`、ルートは GitHub Pages の A レコード4つ）。お名前.com Navi 側の「DNSレコード設定」はネームサーバーが違うため反映されません。メール用のレコード（MX / SPF / DKIM / mail / ml-cp）は消さないでください。
 - 英語版は `/en/` 配下。各ページの `<head>` に ja / en / x-default の `hreflang`、sitemap にも両言語を登録済み。ヘッダーの JA / EN で対応ページ同士を行き来できます。
 - 英語版の文言方針: 直訳ではなく英語圏向けに簡潔に書く。用語は Metal Recovery / Urban Mining、HPP (High Pressure Processing)、cold-pressed、Secondhand Dealer Licence (Tokyo Metropolitan Public Safety Commission)。detox / anti-aging / supplement 等の効能表現は使わない。
 
