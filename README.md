@@ -8,7 +8,7 @@
     index.html                トップ
     business/index.html       事業内容（5領域・7事業）
     business/metal/index.html 金属回収
-    business/ingredients/index.html 食品原料・食品添加物（日本語のみ。英語版は未作成）
+    business/ingredients/index.html 食品原料・食品添加物
     business/kharis/index.html KHARIS
     business/wagyu/index.html Wisteria WAGYU
     company/index.html        会社概要
