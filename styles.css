@@ -358,6 +358,12 @@ footer .cr a:hover{border-bottom-color:currentColor}
 }
 
 /* business: product list */
+.certs{margin-top:clamp(40px,5vw,64px);padding-top:clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+.certs h3{font-family:var(--serif);font-weight:500;font-size:clamp(18px,2vw,24px);line-height:1.6;letter-spacing:.06em;margin:0 0 20px}
+.cert-list{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:10px 12px}
+.cert-list li{font-family:var(--en);font-size:15px;font-weight:600;letter-spacing:.12em;line-height:1;border:1px solid var(--base);padding:12px 22px;border-radius:999px;white-space:nowrap}
+.certs .dsc{font-size:14px;line-height:2.3;letter-spacing:.04em;color:var(--muted);margin:0;max-width:44em}
+html[lang="en"] .certs h3{letter-spacing:.03em}
 .items{display:grid;gap:clamp(40px,5vw,64px)}
 .items .grp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:clamp(16px,4vw,56px);padding-top:clamp(22px,3vw,30px);border-top:1px solid var(--ink)}
 .items h3{font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.8vw,21px);letter-spacing:.06em;line-height:1.6;margin:0}
