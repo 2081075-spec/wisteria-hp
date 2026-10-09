@@ -8,7 +8,8 @@
     index.html                トップ
     business/index.html       事業内容（5領域・7事業）
     business/metal/index.html 金属回収
-    business/ingredients/index.html 食品原料・食品添加物
+    business/ingredients/index.html 食品添加物・食品原料・飼料用添加物（FAQ付き）
+    business/ingredients/products/index.html 取扱品目一覧（28品目：用途・法規上の区分）
     business/kharis/index.html KHARIS
     business/wagyu/index.html Wisteria WAGYU
     company/index.html        会社概要
@@ -31,7 +32,10 @@
 
 ## 更新時のメモ
 
-- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。
+- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。現在 styles.css は `v=20261009a`。
+- KHARIS のポスター画像は `assets/kharis-*.webp`（本命）＋ `kharis-*.jpg`（フォールバック）を `<picture>` で出し分け。元の PNG（1枚3MB前後）は削除済み。
+- 食品添加物ページの OGP 画像は `assets/og-ingredients.png`（1200×630）。他ページは `assets/og-image.png`。
+- 取扱品目一覧の「法規上の区分」は `wisteria-food-import/reports/2026-10-06_輸入可否_一次資料照合.md` の照合結果に基づく。品目を増減するときは両言語のページと `sitemap.xml` の lastmod を更新する。
 - canonical / OGP / sitemap / JSON-LD は `https://www.wisteria-group.jp/` を正規URLにしています。
 - DNS はお名前.com レンタルサーバー（ベーシック）のコントロールパネル →「ドメイン」→「DNSレコード」で管理しています（www は CNAME → `2081075-spec.github.io`、ルートは GitHub Pages の A レコード4つ）。お名前.com Navi 側の「DNSレコード設定」はネームサーバーが違うため反映されません。メール用のレコード（MX / SPF / DKIM / mail / ml-cp）は消さないでください。
 - 英語版は `/en/` 配下。各ページの `<head>` に ja / en / x-default の `hreflang`、sitemap にも両言語を登録済み。ヘッダーの JA / EN で対応ページ同士を行き来できます。

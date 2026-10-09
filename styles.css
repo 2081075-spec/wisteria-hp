@@ -409,3 +409,35 @@ html[lang="en"] .split .w{max-width:100%}
 .drawer .lang-d::before{content:"";display:inline-block;width:20px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px;opacity:.6}
 .drawer.open a:nth-child(6){transition-delay:.38s}
 @media (max-width:767px){.lang-m{display:inline-flex}}
+
+/* 2026-10-09: focus block (top), product list, misc */
+.focus .focus-figs{margin:clamp(28px,4vw,44px) 0}
+.focus .figs{background:rgba(251,250,248,.22);border-color:rgba(251,250,248,.22)}
+.focus .figs>div{background:var(--teal)}
+.focus-links{display:flex;flex-wrap:wrap;gap:12px}
+.focus-links .btn-sm{border-color:rgba(251,250,248,.5)}
+.focus-links .btn-sm:hover{color:var(--ink)}
+.h1-sub{display:block;font-family:var(--en);font-weight:400;font-size:clamp(14px,1.4vw,18px);letter-spacing:.2em;color:var(--muted);margin-top:14px}
+.plist{display:grid;gap:clamp(48px,6vw,80px)}
+.pgrp h2.side{padding-bottom:16px;border-bottom:1px solid var(--ink);margin-bottom:0}
+.pgrp h2.side small{display:inline-block;font-family:var(--en);font-weight:400;font-size:12px;letter-spacing:.22em;color:var(--muted);margin-left:14px;vertical-align:middle}
+.ptable{width:100%;border-collapse:collapse;font-size:14px;line-height:1.9;letter-spacing:.03em}
+.ptable th{font-family:var(--en);font-weight:400;font-size:11px;letter-spacing:.2em;color:var(--muted);text-align:left;padding:14px 16px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+.ptable td{vertical-align:top;padding:16px 16px 16px 0;border-bottom:1px solid var(--line);color:var(--ink)}
+.ptable td:not(:first-child){color:rgba(0,25,26,.78)}
+.ptable td b{font-family:var(--serif);font-weight:500;font-size:15px;letter-spacing:.05em;line-height:1.7;display:block}
+.ptable .en-name{display:block;font-family:var(--en);font-size:13px;letter-spacing:.06em;color:var(--muted);margin-top:2px}
+.ptable td:nth-child(1){width:30%}.ptable td:nth-child(2){width:20%}.ptable td:nth-child(4){width:12%;white-space:nowrap}
+.items li a{background:linear-gradient(currentColor,currentColor) no-repeat left bottom/0 1px;transition:background-size .4s var(--ease)}
+.items li a:hover{background-size:100% 1px}
+.biz .links{display:flex;flex-wrap:wrap;gap:12px 28px}
+@media (max-width:767px){
+  .ptable thead{display:none}
+  .ptable,.ptable tbody,.ptable tr,.ptable td{display:block;width:auto!important;white-space:normal!important}
+  .ptable tr{padding:18px 0;border-bottom:1px solid var(--line)}
+  .ptable td{padding:6px 0;border:0}
+  .ptable td::before{content:attr(data-l);display:block;font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:2px}
+  .ptable td:first-child::before{display:none}
+  .focus-links .btn-sm{width:100%;text-align:center}
+}
+@media (max-width:767px){.figs>div:last-child:nth-child(odd){grid-column:1/-1}}
