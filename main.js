@@ -201,6 +201,65 @@
       ring.style.transform = 'rotate(-90deg)'; ring.style.transformOrigin = '50% 50%';
       ring.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 1600, easing: EASE, fill: 'forwards' });
     }
+    // ---- hero petals: wisteria blossoms drifting through the vine ----
+    var petalCanvas = hero.querySelector('canvas.petals');
+    var pctx = petalCanvas && !reduced && petalCanvas.getContext ? petalCanvas.getContext('2d') : null;
+    if (pctx) {
+      var pw = 0, ph = 0, pdpr = 1, petals = [], praf = 0, pstart = 0, pvisible = true, pageHidden = document.hidden;
+      var newPetal = function (anywhere) {
+        var wide = pw > 767;
+        return {
+          x: wide ? pw * 0.42 + Math.random() * pw * 0.58 : Math.random() * pw,
+          y: anywhere ? Math.random() * ph : -16,
+          vy: 0.22 + Math.random() * 0.4,
+          sw: Math.random() * Math.PI * 2, sws: 0.5 + Math.random() * 0.8,
+          r: 2.6 + Math.random() * 3.6,
+          rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.018,
+          a: 0.16 + Math.random() * 0.3
+        };
+      };
+      var sizePetals = function () {
+        var oldW = pw;
+        pdpr = Math.min(2, window.devicePixelRatio || 1);
+        pw = hero.clientWidth; ph = hero.clientHeight;
+        petalCanvas.width = Math.round(pw * pdpr); petalCanvas.height = Math.round(ph * pdpr);
+        pctx.setTransform(pdpr, 0, 0, pdpr, 0, 0);
+        var count = Math.max(14, Math.min(46, Math.round(pw * ph / 26000)));
+        // reseed only when the width or the petal count changes; a phone URL bar
+        // collapsing only changes the height and must not make the petals jump
+        if (pw !== oldW || petals.length !== count) {
+          petals = [];
+          for (var i = 0; i < count; i++) petals.push(newPetal(true));
+        }
+      };
+      var drawPetals = function (now) {
+        if (!pstart) pstart = now;
+        var fade = Math.min(1, (now - pstart) / 1800);
+        pctx.clearRect(0, 0, pw, ph);
+        for (var i = 0; i < petals.length; i++) {
+          var p = petals[i];
+          p.y += p.vy; p.sw += 0.01 * p.sws; p.x += Math.sin(p.sw) * 0.35; p.rot += p.vr;
+          if (p.y > ph + 20 || p.x < -20 || p.x > pw + 20) petals[i] = p = newPetal(false);
+          pctx.save();
+          pctx.translate(p.x, p.y); pctx.rotate(p.rot);
+          pctx.fillStyle = 'rgba(80,63,153,' + (p.a * fade).toFixed(3) + ')';
+          pctx.beginPath(); pctx.ellipse(0, 0, p.r, p.r * 0.55, 0, 0, Math.PI * 2); pctx.fill();
+          pctx.restore();
+        }
+        praf = requestAnimationFrame(drawPetals);
+      };
+      var runPetals = function () {
+        cancelAnimationFrame(praf); praf = 0;
+        if (pvisible && !pageHidden) praf = requestAnimationFrame(drawPetals);
+      };
+      sizePetals(); runPetals();
+      var presize;
+      window.addEventListener('resize', function () { clearTimeout(presize); presize = setTimeout(function () { sizePetals(); }, 150); });
+      document.addEventListener('visibilitychange', function () { pageHidden = document.hidden; runPetals(); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) { pvisible = entries[0].isIntersecting; runPetals(); }, { threshold: 0 }).observe(hero);
+      }
+    }
     var intro = hero.querySelector('.intro');
     if (intro && !reduced) {
       Array.prototype.slice.call(intro.children).forEach(function (k, i) {

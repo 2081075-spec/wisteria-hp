@@ -17,7 +17,7 @@
     en/…                      英語版（同じ構成。en/index.html, en/business/…, en/company/, en/contact/）
     404.html                  見つからないページ（日英併記）
     styles.css                全ページ共通のスタイル
-    main.js                   全ページ共通のスクリプト（メニュー、スクロール演出、枝分かれSVG、フォーム送信）
+    main.js                   全ページ共通のスクリプト（メニュー、スクロール演出、枝分かれSVG、トップの花びらcanvas、フォーム送信）
     assets/                   ロゴ・写真・favicon・OG画像
     sitemap.xml / robots.txt
 
@@ -32,7 +32,7 @@
 
 ## 更新時のメモ
 
-- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。現在 styles.css は `v=20261009a`。
+- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。現在 styles.css・main.js とも `v=20261019a`。
 - KHARIS のポスター画像は `assets/kharis-*.webp`（本命）＋ `kharis-*.jpg`（フォールバック）を `<picture>` で出し分け。元の PNG（1枚3MB前後）は削除済み。
 - 食品添加物ページの OGP 画像は `assets/og-ingredients.png`（1200×630）。他ページは `assets/og-image.png`。
 - 取扱品目一覧の「法規上の区分」は `wisteria-food-import/reports/2026-10-06_輸入可否_一次資料照合.md` の照合結果に基づく。品目を増減するときは両言語のページと `sitemap.xml` の lastmod を更新する。
