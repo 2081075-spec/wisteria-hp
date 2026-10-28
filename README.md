@@ -6,10 +6,11 @@
 ## ファイル
 
     index.html                トップ
-    business/index.html       事業内容（5領域・7事業）
+    business/index.html       事業内容（6領域・8事業）
     business/metal/index.html 金属回収
     business/ingredients/index.html 食品添加物・食品原料・飼料用添加物（FAQ付き）
     business/ingredients/products/index.html 取扱品目一覧（28品目：用途・法規上の区分）
+    business/marble/index.html 　大理石・天然石（トルコ・イズミルの製造元、限定石9種・スラブ43種・FAQ付き）
     business/kharis/index.html KHARIS
     business/wagyu/index.html Wisteria WAGYU
     company/index.html        会社概要
@@ -32,14 +33,18 @@
 
 ## 更新時のメモ
 
-- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。現在 styles.css・main.js とも `v=20261019a`。
+- CSS / JS を変更したら、全HTMLの `styles.css?v=` と `main.js?v=` の日付を上げる（キャッシュ対策）。現在 styles.css・main.js とも `v=20261028a`。
 - KHARIS のポスター画像は `assets/kharis-*.webp`（本命）＋ `kharis-*.jpg`（フォールバック）を `<picture>` で出し分け。元の PNG（1枚3MB前後）は削除済み。
-- 食品添加物ページの OGP 画像は `assets/og-ingredients.png`（1200×630）。他ページは `assets/og-image.png`。
+- 食品添加物ページの OGP 画像は `assets/og-ingredients.png`、大理石ページは `assets/og-marble.png`（いずれも1200×630）。他ページは `assets/og-image.png`。
+- 大理石ページの画像は `assets/marble/`（exclusive＝限定石9種、slabs＝スラブ43種、scene＝製造元のイメージ画像、thumbs＝トップ用正方形サムネ）。各 WebP＋JPEG を `<picture>` で出し分け。元データは `AIno/HP　大理石/`（製造元のカタログPDF3冊と画像43枚）。製造元の社名は公開サイトには書かない方針（お問い合わせ後に案内）。
+- お問い合わせフォームは `contact/?kind=marble` のように `kind` クエリで種別を事前選択できる（main.js）。
 - 取扱品目一覧の「法規上の区分」は `wisteria-food-import/reports/2026-10-06_輸入可否_一次資料照合.md` の照合結果に基づく。品目を増減するときは両言語のページと `sitemap.xml` の lastmod を更新する。
 - canonical / OGP / sitemap / JSON-LD は `https://www.wisteria-group.jp/` を正規URLにしています。
 - DNS はお名前.com レンタルサーバー（ベーシック）のコントロールパネル →「ドメイン」→「DNSレコード」で管理しています（www は CNAME → `2081075-spec.github.io`、ルートは GitHub Pages の A レコード4つ）。お名前.com Navi 側の「DNSレコード設定」はネームサーバーが違うため反映されません。メール用のレコード（MX / SPF / DKIM / mail / ml-cp）は消さないでください。
 - 英語版は `/en/` 配下。各ページの `<head>` に ja / en / x-default の `hreflang`、sitemap にも両言語を登録済み。ヘッダーの JA / EN で対応ページ同士を行き来できます。
 - 英語版の文言方針: 直訳ではなく英語圏向けに簡潔に書く。用語は Metal Recovery / Urban Mining、HPP (High Pressure Processing)、cold-pressed、Secondhand Dealer Licence (Saitama Prefectural Public Safety Commission)。detox / anti-aging / supplement 等の効能表現は使わない。
+
+- 2026-10-29 問い合わせ導線の強化：全ページのスマホ用ヘッダーに「相談する」ボタン（`.hd-cta`、ページごとの `?kind=`）、PCのグロナビ「お問い合わせ」を枠線ボタン化、フッターに電話番号と主力2事業へのリンク。大理石ページは限定石カード・スラブ図版から `contact/?kind=marble&stone=石名` で本文を自動入力（main.js）。種別ごとに記入例の placeholder。ページ途中の相談ブロック（`.midcta`）、「輸入者について」ブロック。スマホで問い合わせフォームがはみ出す不具合を修正（`.two` 系の `minmax(0,1fr)` と select の幅）。印刷用CSS（演出で非表示の要素を表示）。
 
 ## お問い合わせフォーム
 

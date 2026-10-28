@@ -63,7 +63,10 @@
   }
   document.querySelectorAll('[data-split]').forEach(function (el) {
     if (reduced) return;
-    Array.prototype.slice.call(el.childNodes).forEach(function (n) { if (n.nodeType === 3) splitNode(n); });
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    textNodes.forEach(splitNode);
     var chars = el.querySelectorAll('.ch');
     var step = Math.max(14, Math.min(40, 900 / Math.max(chars.length, 1)));
     chars.forEach(function (c, i) { c.style.transitionDelay = (i * step) + 'ms'; });
@@ -80,7 +83,7 @@
     el.classList.add('shown');
     if (el.hasAttribute('data-stagger') || el.classList.contains('idx')) {
       Array.prototype.slice.call(el.children).forEach(function (k, i) {
-        k.style.transitionDelay = (i * 90) + 'ms';
+        k.style.transitionDelay = (Math.min(i, 9) * 90) + 'ms';
         k.classList.add('shown');
       });
     }
@@ -88,7 +91,7 @@
   function countUp(el) {
     var to = Number(el.dataset.count), t0 = performance.now();
     (function tick(t) {
-      var p = Math.min((t - t0) / 1300, 1);
+      var p = Math.min((t - t0) / 700, 1);
       el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - p, 3))));
       if (p < 1) requestAnimationFrame(tick);
     })(t0);
@@ -290,6 +293,12 @@
   var form = document.querySelector('form.contact');
   var done = document.querySelector('.done');
   if (form) {
+    // preselect the subject from ?kind=… so business pages can deep-link into the form
+    try {
+      var kindParam = new URLSearchParams(location.search).get('kind');
+      var kindField = form.elements.kind;
+      if (kindParam && kindField && Array.prototype.some.call(kindField.options, function (o) { return o.value === kindParam; })) kindField.value = kindParam;
+    } catch (err) {}
     var endpoint = form.getAttribute('data-endpoint');
     var EN = form.getAttribute('data-lang') === 'en';
     var T = EN ? {
@@ -313,6 +322,28 @@
       failed: '送信できませんでした。お手数ですが、<a href="mailto:info@wisteria.email?subject=%s&body=%b">info@wisteria.email へ直接メールを送る</a>か、しばらく経ってからもう一度お試しください。',
       labels: ['種別', '会社名・団体名', 'お名前', 'メールアドレス', '電話番号', 'ご相談の内容']
     };
+    // ?stone=… (from the marble page) pre-fills the message; the placeholder follows the selected subject
+    try {
+      var stoneParam = new URLSearchParams(location.search).get('stone');
+      var bodyField = form.elements.body;
+      if (stoneParam && bodyField && !bodyField.value) {
+        bodyField.value = EN
+          ? 'Stone: ' + stoneParam + '\nApplication (wall / floor / countertop etc.):\nApproximate quantity (m² or slabs):\nDelivery timing:\n'
+          : 'ご希望の石種：' + stoneParam + '\n用途（壁面・床・カウンターなど）：\n数量の目安（㎡・枚数）：\n納入時期：\n';
+      }
+      var PH = EN ? {
+        marble: 'e.g. Stone: Blue Roots / Application: hotel lobby wall / Quantity: approx. 120 m² / Timing: spring 2027',
+        ingredients: 'e.g. Product: GDL / Application: tofu coagulant / Quantity: 1 t per month / Packaging: 25 kg bags',
+        _: 'Tell us which business line it concerns and what you would like to know.'
+      } : {
+        marble: '例）石種：Blue Roots／用途：ホテルロビー壁面／数量：約120㎡／時期：2027年春',
+        ingredients: '例）品目：GDL／用途：豆腐用凝固剤／数量：月1t／荷姿：25kg袋',
+        _: 'どの事業について、何をお知りになりたいかをお書きください。'
+      };
+      var kindSel2 = form.elements.kind;
+      var setPh = function () { if (bodyField) bodyField.placeholder = PH[kindSel2 && kindSel2.value] || PH._; };
+      if (kindSel2) { setPh(); kindSel2.addEventListener('change', setPh); }
+    } catch (err2) {}
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var val = function (n) { return form.elements[n] && form.elements[n].value ? form.elements[n].value.trim() : ''; };
